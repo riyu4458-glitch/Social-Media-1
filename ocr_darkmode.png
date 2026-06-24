@@ -1,0 +1,41 @@
+"""
+generate_sample_data.py
+Run this once to create data/sample_dataset.csv for testing.
+"""
+import pandas as pd, random, os
+
+random.seed(42)
+os.makedirs("data", exist_ok=True)
+
+POS = [
+    "I absolutely love this product!", "Amazing experience, highly recommend.",
+    "This made my day so much better.", "Best purchase I've ever made.",
+    "Exceeded all my expectations.", "Fantastic quality and fast shipping.",
+    "Totally worth it, very happy.", "Five stars no question.",
+    "Delightful and well made.", "So grateful for this amazing service.",
+]
+NEG = [
+    "Worst product I have ever bought.", "Complete waste of money.",
+    "Broke after one week, very disappointed.", "Terrible customer service.",
+    "Would not recommend to anyone.", "Absolute garbage, returning immediately.",
+    "Horrible quality, falls apart easily.", "Very frustrating experience.",
+    "Never buying from here again.", "Disgusted by the poor build quality.",
+]
+NEU = [
+    "It is okay, nothing special.", "Arrived on time, average product.",
+    "Does what it says on the tin.", "Neither good nor bad, just fine.",
+    "Acceptable for the price I guess.", "Somewhat useful but nothing great.",
+    "Average quality, meets basic needs.", "Not bad but not great either.",
+    "It works as described.", "Unremarkable but functional.",
+]
+
+rows = []
+for _ in range(300):
+    sent = random.choice(["Positive", "Negative", "Neutral"])
+    pool = POS if sent == "Positive" else (NEG if sent == "Negative" else NEU)
+    rows.append({"text": random.choice(pool), "sentiment": sent})
+
+df = pd.DataFrame(rows).sample(frac=1, random_state=42).reset_index(drop=True)
+df.to_csv("data/sample_dataset.csv", index=False)
+print(f"Saved {len(df)} rows to data/sample_dataset.csv")
+print(df["sentiment"].value_counts())

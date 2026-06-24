@@ -1,0 +1,15 @@
+streamlit
+pandas
+numpy==1.26.4
+matplotlib
+plotly
+scikit-learn==1.4.2
+nltk
+opencv-python-headless
+pillow
+pytesseract
+joblib
+tensorflow==2.15.1
+keras==2.15.0
+wordcloud
+pytesseract
