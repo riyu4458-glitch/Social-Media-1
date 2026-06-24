@@ -750,9 +750,9 @@ elif page == "🤨 Fake News Detection":
             verdict, confidence, fake_prob, real_prob = predict_fake_news(news_text)
 
             st.session_state.history.append({
-                "Text": news_text[:80],
-                "Verdict": verdict,
-                "Confidence": round(confidence * 100, 2)
+                "text": news_text[:80],
+                "label": verdict,
+                "confidence": confidence,
             })
 
             c1, c2, c3, c4 = st.columns(4)
